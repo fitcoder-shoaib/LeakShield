@@ -70,9 +70,33 @@ Step 5: Install Python dependencies
 
 pip install -r requirements.txt
 
-Step 6: Run the application
+Step 6: Run the web application
 
-streamlit run app.py –server.port=8501 –server.address=0.0.0.0
+streamlit run app.py --server.port=8501 --server.address=0.0.0.0
+
+Step 7: Run the command line tool directly
+
+./leakshield scan document.txt report.pdf notes.docx
+
+Step 8: Optional: install the command line tool locally
+
+pip install -e .
+
+After installation, scan files from anywhere with:
+
+leakshield scan document.txt report.pdf notes.docx
+
+Write redacted text copies into a folder:
+
+leakshield scan document.txt --redact-dir redacted
+
+Print JSON output for scripts or CI:
+
+leakshield scan document.txt --json
+
+Fail with exit code 2 when a file reaches Medium or High risk:
+
+leakshield scan document.txt --fail-on-risk Medium
 
 ⸻
 
