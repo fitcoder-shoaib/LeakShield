@@ -14,6 +14,10 @@ dependencies = [
     "pdfplumber",
     "python-docx",
     "pillow",
+    "openpyxl",
+    "python-pptx",
+    "extract-msg",
+    "pytesseract",
 ]
 
 [project.scripts]

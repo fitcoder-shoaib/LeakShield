@@ -9,13 +9,35 @@ The application is designed to be simple, explainable, and suitable for complian
 FEATURES
 
 • Multi-file upload support
-• Detection of PII, financial data, and credentials
+• Scans text, logs, JSON, CSV, PDF, Word, Excel, PowerPoint, email, and image files
+• Detection of PII, identity documents, financial data, credentials, health data, and location data
 • Context-aware risk scoring (Low / Medium / High)
 • Explainable “why is this risky?” output
 • Automated redacted file generation
 • Temporary scan history with auto-delete
 • Manual history clear option
 • Privacy-first design (no permanent data storage)
+
+LeakShield detects common forms of sensitive data including passwords, password hashes, PINs, OTPs, SSNs, national IDs, Aadhaar numbers, passport numbers, driver license numbers, bank account numbers, credit card numbers, CVVs, emails, phone numbers, addresses, dates of birth, medical records, salary values, tax IDs, API keys, private keys, access tokens, refresh tokens, GPS locations, and biometric indicators.
+
+⸻
+
+SUPPORTED FILE TYPES
+
+LeakShield can scan:
+
+• Text and structured text: .txt, .log, .json, .csv
+• Documents: .pdf, .doc, .docx
+• Spreadsheets: .xlsx
+• Presentations: .pptx
+• Email files: .eml, .msg
+• Images and screenshots: .png, .jpg, .jpeg, .webp, .tif, .tiff, .bmp
+
+Notes:
+
+• Image scanning uses OCR and requires the Tesseract system binary.
+• Legacy .doc scanning requires antiword on Linux, or textutil on macOS.
+• Modern Office files use Python libraries: python-docx, openpyxl, and python-pptx.
 
 ⸻
 
@@ -26,6 +48,10 @@ TECH STACK
 • Pandas – structured data handling and reporting
 • pdfplumber – PDF text extraction
 • python-docx – Word document parsing
+• openpyxl – Excel spreadsheet parsing
+• python-pptx – PowerPoint parsing
+• extract-msg – Outlook .msg email parsing
+• pytesseract + Tesseract OCR – image and screenshot text extraction
 • Pillow – image and logo handling
 
 ⸻
@@ -46,13 +72,18 @@ apt update && apt upgrade -y
 
 Step 2: Install required system dependencies
 
-apt install -y python3 python3-pip python3-venv build-essential git
+apt install -y python3 python3-pip python3-venv build-essential git tesseract-ocr antiword
+
+On macOS, install OCR and legacy Word support with:
+
+brew install tesseract antiword
 
 Verify installation:
 
 python3 --version
 pip3 --version
 git --version
+tesseract --version
 
 Step 3: Clone the GitHub repository
 
@@ -76,7 +107,7 @@ streamlit run app.py --server.port=8501 --server.address=0.0.0.0
 
 Step 7: Run the command line tool directly
 
-./leakshield scan document.txt report.pdf notes.docx
+./leakshield scan document.txt report.pdf notes.docx sheet.xlsx slides.pptx email.eml screenshot.png
 
 Step 8: Optional: install the command line tool locally
 
@@ -84,7 +115,7 @@ pip install -e .
 
 After installation, scan files from anywhere with:
 
-leakshield scan document.txt report.pdf notes.docx
+leakshield scan document.txt report.pdf notes.docx sheet.xlsx slides.pptx email.eml screenshot.png
 
 Write redacted text copies into a folder:
 

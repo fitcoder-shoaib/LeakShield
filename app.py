@@ -92,7 +92,26 @@ st.session_state.history = [
 
 uploaded_files = st.file_uploader(
     "Upload files to scan",
-    type=["txt", "log", "json", "pdf", "docx"],
+    type=[
+        "txt",
+        "log",
+        "json",
+        "csv",
+        "pdf",
+        "doc",
+        "docx",
+        "xlsx",
+        "pptx",
+        "eml",
+        "msg",
+        "png",
+        "jpg",
+        "jpeg",
+        "webp",
+        "tif",
+        "tiff",
+        "bmp",
+    ],
     accept_multiple_files=True,
 )
 

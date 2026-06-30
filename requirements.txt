@@ -3,3 +3,7 @@ pandas
 pdfplumber
 python-docx
 pillow
+openpyxl
+python-pptx
+extract-msg
+pytesseract
